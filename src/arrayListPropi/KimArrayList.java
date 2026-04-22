@@ -15,7 +15,7 @@ public class KimArrayList<E> implements List<E> {
     }
 
     public String toString() {
-
+        return "";
     }
     @Override
     public int size() {
