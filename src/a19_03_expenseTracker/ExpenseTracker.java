@@ -1,6 +1,6 @@
 package a19_03_expenseTracker;
 
-import a19_01_arrayListWithNumbers.ArrayListWithNumbers;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +34,11 @@ public class ExpenseTracker {
     }
 
     public float totalWithTolerance(List<Float> list, float amount, float tolerance) {
-
-        return 0;
+        float total = 0;
+        for (float num : list) {
+            if (amount-tolerance <= num && amount+ tolerance >= num) total += num;
+        }
+        return total;
     }
 
     public static void main(String[] args) {
@@ -65,14 +68,14 @@ public class ExpenseTracker {
             case 1 -> System.out.printf("Total expenses: %.2f%n", p.totalExpenses(llistaDeNumerets));
             case 2 -> {
                 System.out.println("Enter amount:");
-                System.out.printf("Expenses %.2f%n", p.totalAbove(llistaDeNumerets, sc.nextFloat()));
+                System.out.printf("Expenses: %.2f%n", p.totalAbove(llistaDeNumerets, sc.nextFloat()));
             }
             default -> {
                 System.out.println("Enter value:");
                 float value = sc.nextInt();
                 System.out.println("Enter tolerance:");
 
-                System.out.printf("Expenses %.2f%n", p.totalWithTolerance(llistaDeNumerets, value, sc.nextFloat()));
+                System.out.printf("Expenses: %.2f%n", p.totalWithTolerance(llistaDeNumerets, value, sc.nextFloat()));
 
             }
         }
