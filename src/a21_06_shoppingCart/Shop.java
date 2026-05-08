@@ -1,4 +1,4 @@
-package a21_03_shopSort;
+package a21_06_shoppingCart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Shop {
     public Shop(String name) {
         this.name = name;
 
-        products = new java.util.ArrayList<>();
+        products = new ArrayList<>();
     }
 
     public String getName() {
@@ -53,6 +53,11 @@ public class Shop {
         producteAActualitzar.setSize(product.getSize());
 
         return true;
+    }
+    public Product getProductById(int id) {
+        if (numProducts() < id || id <= 0) return null;
+
+        return products.get(id - 1);
     }
 
     public boolean removeProductById(int id) {

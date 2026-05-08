@@ -1,4 +1,4 @@
-package a21_03_shopSort;
+package a21_06_shoppingCart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +11,18 @@ public class Main {
 
     public static void main(String[] args) {
         Shop shop = new Shop("Ebay");
+        Cart cart = new Cart();
         List<Product> llistaProductes = new ArrayList<>();
         afegirProductes(llistaProductes);
         shop.setProducts(llistaProductes);
         while (true) {
-            System.out.println("1. LIST ALL PRODUCTS\n" +
-                    "2. SORT BY NAME AND SIZE\n" +
-                    "3. SORT BY PRICE\n" +
-                    "4. SORT BY NAME AND PRICE\n" +
+            System.out.println("1. LIST PRODUCTS (SHOP)\n" +
+                    "2. ADD PRODUCT TO CART\n" +
+                    "3. LIST CART\n" +
+                    "4. REMOVE PRODUCT FROM CART\n" +
+                    "5. CART TOTAL\n" +
+                    "6. CART TAX (IVA 21%)\n" +
+                    "7. CLEAR CART\n" +
                     "0. EXIT\n" +
                     "OPTION?");
 
@@ -35,13 +39,33 @@ public class Main {
                     shop.listProducts();
                 }
                 case 2 -> {
-                    shop.sortByNameAndSize().forEach(System.out::println);;
+                    System.out.println("Enter product ID to add:");
+                    int productId = scanner.nextInt();
+                    scanner.nextLine();
+                    Product product = shop.getProductById(productId);
+                    if (product == null) {
+                        
+                        System.out.println("Product not found");
+                    } else {
+                        cart.addProduct(product);
+                        System.out.println("Product added to cart");
+                    }
+
                 }
                 case 3 -> {
-                    shop.sortByPrice().forEach(System.out::println);
+                    cart.showCart();
                 }
                 case 4 -> {
-                    shop.sortByNameAndPrice().forEach(System.out::println);
+                    System.out.println("Enter product ID to remove:");
+                    int productId = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println((cart.removeProduct(productId)) ? "Product removed from cart":"This id is not in the cart");
+                }
+                case 5 -> System.out.printf("Total: %.2f%n", cart.getTotal()); 
+                case 6 -> System.out.printf("Tax: %.2f%n", cart.getTax()); 
+                case 7 -> {
+                    cart.clearCart();
+                    System.out.println("Cart cleared");
                 }
             }
         }

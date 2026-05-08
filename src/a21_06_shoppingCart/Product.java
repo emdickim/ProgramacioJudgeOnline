@@ -1,4 +1,4 @@
-package a21_03_shopSort;
+package a21_06_shoppingCart;
 
 import java.util.Comparator;
 
